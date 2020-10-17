@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ConferenceTrackManagement.Models;
+using System.Collections.Generic;
 using System.Text;
 
 namespace ConferenceTrackManagement.Utility
@@ -13,6 +14,7 @@ namespace ConferenceTrackManagement.Utility
         public Dictionary<int, List<string>> ExtractEvents(string[] arr)
         {
             Dictionary<int, List<string>> events = new Dictionary<int, List<string>>();
+           // List<Talk> events = new List<Talk>(); 
             for (int i = 0; i < arr.Length; i++)
             {
                 string input = arr[i].Replace(" lightning ", " 5 ");
