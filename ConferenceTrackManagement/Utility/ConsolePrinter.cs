@@ -6,6 +6,10 @@ namespace ConferenceTrackManagement.Utility
 {
     public class ConsolePrinter
     {
+        /// <summary>
+        /// Print any string array.
+        /// </summary>
+        /// <param name="arr"></param>
         public void PrintArray(string[] arr)
         {
             LineBreak();
@@ -14,33 +18,25 @@ namespace ConferenceTrackManagement.Utility
                 Console.WriteLine(item);
             }
             LineBreak();
-
         }
-        public void PrintTracks(Dictionary<int,Track> tracks)
+        /// <summary>
+        /// Print the Schedule into the console in the desired format.
+        /// </summary>
+        /// <param name="schedules"></param>
+        public void PrintSchedule(List<Schedule> schedules)
         {
-            foreach(var track in tracks)
+            int trackCounter = 1;
+
+            foreach (var schedule in schedules)
             {
-                Console.WriteLine("Track "+track.Key+":");
-                Console.WriteLine();
-                DateTime timer = DateTime.Today.AddHours(9);
-                foreach (var talk in track.Value.PreLunchTalks)
-                {
-                    Console.WriteLine(timer.ToString("HH:mmtt") +" "+ talk.Title + " " + talk.Duration + "min");
-                    timer=timer.AddMinutes(talk.Duration);
-                }
-
-                Console.WriteLine(timer.ToString("HH:mmtt") + " Lunch");
-                timer = timer.AddMinutes(60);
-
-                foreach (var talk in track.Value.PostLunchTalks)
-                {
-                    Console.WriteLine(timer.ToString("HH:mmtt") + " " + talk.Title + " " + talk.Duration + "min");
-                    timer = timer.AddMinutes(talk.Duration);
-                }
-                Console.WriteLine(timer.ToString("HH:mmtt") + " Networking Event");
-                Console.WriteLine();
+                Console.WriteLine($"Track {trackCounter}");
+                Console.WriteLine(schedule.ToString());
+                trackCounter++;
             }
         }
+        /// <summary>
+        /// Print a line break.
+        /// </summary>
         private void LineBreak()
         {
             Console.WriteLine("................");

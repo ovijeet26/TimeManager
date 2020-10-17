@@ -1,7 +1,7 @@
-﻿using ConferenceTrackManagement.Utility;
+﻿using ConferenceTrackManagement.Models;
+using ConferenceTrackManagement.Utility;
 using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 
 namespace ConferenceTrackManagement
 {
@@ -9,27 +9,27 @@ namespace ConferenceTrackManagement
     {
         static void Main(string[] args)
         {
-            EventScheduler scheduler = new EventScheduler();
-            scheduler.PrepareSchedule();
-            
-            scheduler.PrintSchedule();
+            //Read the input data.
+            DataReader reader = new DataReader();
+            string[] lines = reader.ReadInputFromFile();
 
-            string[] lines = System.IO.File.ReadAllLines(@"input.txt");
-            Print(lines);
-            Console.WriteLine("................");
-            Console.WriteLine("................");
+            //Optional : Print the raw input data.
+            ConsolePrinter printer = new ConsolePrinter();
+            printer.PrintArray(lines);
+
+            //Parse the raw input data and extract talk details.
             TalkParser parser = new TalkParser();
-            var events = parser.ExtractEvents(lines);
+            List<Talk> talks = parser.ExtractEvents(lines);
+
+            //Schedule the talks according to the given constraints.
+            EventScheduler scheduler = new EventScheduler();
+            List<Schedule> schedule = scheduler.PrepareSchedule(talks);
+
+            //Print the schedule into the console.
+            printer.PrintSchedule(schedule);
+          
             Console.ReadKey();
-
-
         }
-        static void Print(string[] arr)
-        {
-            foreach (var item in arr)
-            {
-                Console.WriteLine(item);
-            }
-        }
+
     }
 }
