@@ -9,7 +9,7 @@ namespace ConferenceTrackManagement.Models
     public class Schedule
     {
         private DateTime _nextAvailableTime;
-        protected SortedDictionary<DateTime, IEvent> schedules = null;
+        protected SortedDictionary<DateTime, Event> schedules = null;
 
         public DateTime StartTime { get; private set; }
 
@@ -24,17 +24,17 @@ namespace ConferenceTrackManagement.Models
             StartTime = startTime;
             EndTime = endTime;
             _nextAvailableTime = startTime;
-            schedules = new SortedDictionary<DateTime, IEvent>();
+            schedules = new SortedDictionary<DateTime, Event>();
         }
 
-        public void AddFixEvent(FixedEvent breakTime)
+        public void AddFixedEvent(FixedEvent breakTime)
         {
             ValidateScheduleStartTime(breakTime.StartTime);
 
             schedules.Add(breakTime.StartTime, breakTime);
         }
 
-        public void AddFixEvent(DateTime startTime, string title, int durationInMinutes)
+        public void AddFixedEvent(DateTime startTime, string title, int durationInMinutes)
         {
             ValidateScheduleStartTime(startTime);
             schedules.Add(startTime, new FixedEvent(startTime, title, durationInMinutes));
@@ -52,7 +52,18 @@ namespace ConferenceTrackManagement.Models
             if (availableTimeSlot >= this.EndTime)
                 throw new EventOutOfScheduleRangeException();
 
-            schedules.Add(availableTimeSlot, new TalkEvent(availableTimeSlot, title, durationInMinutes));
+            Event talkEvent = null;
+
+            if (durationInMinutes <= 5)
+            {
+                talkEvent = new LightningTalkEvent(availableTimeSlot, title, durationInMinutes);
+            }
+            else
+            {
+                talkEvent = new TalkEvent(availableTimeSlot, title, durationInMinutes);
+            }
+
+            schedules.Add(availableTimeSlot, talkEvent);
 
             _nextAvailableTime = availableTimeSlot.AddMinutes(durationInMinutes);
         }

@@ -1,41 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using System;
 
 namespace ConferenceTrackManagement.Models
 {
-    public class TalkEvent : IEvent
+    public class TalkEvent : Event
     {
-        private DateTime _startTime;
-        private string _title;
-        private int _durationInMinutes;
-
-        public TalkEvent(DateTime startTime, string title, int durationInMinutes)
+        public TalkEvent(DateTime startTime, string title, int durationInMinutes) : base(startTime, title, durationInMinutes)
         {
-            StartTime = startTime;
-            Title = title;
-            DurationInMinutes = durationInMinutes;
-        }
 
-        /// <summary>
-        /// Note: This will have only time when Talk will start.
-        /// </summary>
-        public DateTime StartTime
-        {
-            get { return _startTime; }
-            private set { _startTime = value; }
-        }
-
-        public string Title
-        {
-            get { return _title; }
-            private set { _title = value; }
-        }
-
-        public int DurationInMinutes
-        {
-            get { return _durationInMinutes; }
-            private set { _durationInMinutes = value; }
         }
 
         public override string ToString()

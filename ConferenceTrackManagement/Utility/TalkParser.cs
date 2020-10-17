@@ -65,6 +65,7 @@ namespace ConferenceTrackManagement.Utility
                 }
 
             }
+
             return events.OrderBy(o => o.Duration).ToList();
         }
         /// <summary>
@@ -87,7 +88,7 @@ namespace ConferenceTrackManagement.Utility
         /// <param name="eventValue"></param>
         private void AddToEvents(List<Talk> events, int duration, string eventValue)
         {
-            events.Add(new Talk(eventValue,duration));
+            events.Add(new Talk(eventValue, duration));
         }
     }
 }
