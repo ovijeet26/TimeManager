@@ -2,6 +2,9 @@
 
 namespace ConferenceTrackManagement.Models
 {
+    /// <summary>
+    /// Abstract class to act as the super class for the different types of events.
+    /// </summary>
     public abstract class Event
     {
         public Event(DateTime startTime, string title, int durationInMinutes)
