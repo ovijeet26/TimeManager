@@ -6,6 +6,10 @@ namespace ConferenceTrackManagement.Utility
 {
     public class ConsolePrinter
     {
+        /// <summary>
+        /// Print any string array.
+        /// </summary>
+        /// <param name="arr"></param>
         public void PrintArray(string[] arr)
         {
             LineBreak();
@@ -14,8 +18,11 @@ namespace ConferenceTrackManagement.Utility
                 Console.WriteLine(item);
             }
             LineBreak();
-
         }
+        /// <summary>
+        /// Print the Tracks HashMap into the console in the desired format.
+        /// </summary>
+        /// <param name="tracks"></param>
         public void PrintTracks(Dictionary<int,Track> tracks)
         {
             foreach(var track in tracks)
@@ -41,6 +48,9 @@ namespace ConferenceTrackManagement.Utility
                 Console.WriteLine();
             }
         }
+        /// <summary>
+        /// Print a line break.
+        /// </summary>
         private void LineBreak()
         {
             Console.WriteLine("................");

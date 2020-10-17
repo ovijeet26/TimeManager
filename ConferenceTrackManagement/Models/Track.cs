@@ -2,6 +2,9 @@
 
 namespace ConferenceTrackManagement.Models
 {
+    /// <summary>
+    /// Track class ccontaining two lists for talks before and after lunch.
+    /// </summary>
     public class Track
     {
         public Track()

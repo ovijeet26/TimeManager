@@ -19,7 +19,7 @@ namespace ConferenceTrackManagement
 
             //Parse the raw input data and extract talk details.
             TalkParser parser = new TalkParser();
-            var events = parser.ExtractEvents(lines);
+            List<Talk> events = parser.ExtractEvents(lines);
 
             //Schedule the talks according to the given constraints.
             TalkScheduler scheduler = new TalkScheduler();

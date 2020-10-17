@@ -7,27 +7,26 @@ namespace ConferenceTrackManagement.Utility
 {
     class TalkScheduler
     {
-        public Dictionary<int, Track> ScheduleTalks(Dictionary<int, List<string>> events)
+
+        public Dictionary<int, Track> ScheduleTalks(List<Talk> events)
         {
             Dictionary<int, Track> tracks = new Dictionary<int, Track>();
 
-            int totalEventTime = 0;
-            foreach (var e in events)
-            {
-                totalEventTime += e.Key * e.Value.Count;
-            }
+            int totalEventTime = TotalTalksDuration(events);
 
-            int maxOneTrackCapacity = (3 + 4) * 60;
-            float fraction = ((float)totalEventTime / (float)maxOneTrackCapacity);
-            int trackCount = (int)(Math.Ceiling(fraction));
+            int trackCount = TotalTracksCount(totalEventTime);
 
-            List<Talk> talks = DescendingListOfTalks(events);
-
+            List<Talk> talks = AscendingListOfTalks(events);
+            
+            //Iterating over number of Tracks.
             for (int track = 1; track <= trackCount; track++)
             {
                 tracks[track] = new Track();
+                //9 AM to 12 PM
                 int morningSessionTimeRemaining = 180;
+                //1 PM to 5 PM
                 int eveningSessionTimeRemaining = 240;
+                //Iterating over the list of Talks.
                 for (int i=0;i<talks.Count;i++)
                 {
                     if (morningSessionTimeRemaining - talks[i].Duration >= 0)
@@ -46,6 +45,7 @@ namespace ConferenceTrackManagement.Utility
                         i--;
                         continue;
                     }
+                    //Cannot fit anymore talks in this Track.
                     else
                     {
                         break;
@@ -55,19 +55,40 @@ namespace ConferenceTrackManagement.Utility
             }
             return tracks;
         }
-
-        private List<Talk> DescendingListOfTalks(Dictionary<int, List<string>> events)
+        /// <summary>
+        /// Total duration of the talks.
+        /// </summary>
+        /// <param name="events"></param>
+        /// <returns></returns>
+        private int TotalTalksDuration(List<Talk> events)
         {
-            List<Talk> talks = new List<Talk>();
-            foreach(var e in events)
+            int totalEventTime = 0;
+            foreach (var e in events)
             {
-                foreach(var talk in e.Value)
-                {
-                    Talk t = new Talk(e.Key,talk);
-                    talks.Add(t);
-                }
+                totalEventTime += e.Duration;
             }
-            return talks.OrderByDescending(o => o.Duration).ToList();
+            return totalEventTime;
+        }
+        /// <summary>
+        /// Total number of tracks the Talks need to be divided in.
+        /// </summary>
+        /// <param name="totalTalksDuration"></param>
+        /// <returns></returns>
+        private int TotalTracksCount(int totalTalksDuration)
+        {
+            int maxOneTrackCapacity = (3 + 4) * 60;
+            float fraction = ((float)totalTalksDuration / (float)maxOneTrackCapacity);
+            int trackCount = (int)(Math.Ceiling(fraction));
+            return trackCount;
+        }
+        /// <summary>
+        /// Return the Talk List in descending order of duration.
+        /// </summary>
+        /// <param name="events"></param>
+        /// <returns></returns>
+        private List<Talk> AscendingListOfTalks(List<Talk> events)
+        {
+            return events.OrderBy(o => o.Duration).ToList();
         }
     }
 }

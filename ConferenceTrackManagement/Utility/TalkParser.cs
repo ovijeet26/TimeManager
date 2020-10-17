@@ -7,14 +7,13 @@ namespace ConferenceTrackManagement.Utility
     class TalkParser
     {
         /// <summary>
-        /// Extract talks and duration into a HashMap.
+        /// Extract talks and duration into a List of Talk objects.
         /// </summary>
         /// <param name="arr"></param>
         /// <returns></returns>
-        public Dictionary<int, List<string>> ExtractEvents(string[] arr)
+        public List<Talk> ExtractEvents(string[] arr)
         {
-            Dictionary<int, List<string>> events = new Dictionary<int, List<string>>();
-           // List<Talk> events = new List<Talk>(); 
+            List<Talk> events = new List<Talk>(); 
             for (int i = 0; i < arr.Length; i++)
             {
                 string input = arr[i].Replace(" lightning ", " 5 ");
@@ -79,25 +78,16 @@ namespace ConferenceTrackManagement.Utility
             arr[iteratingIndex] = arr[iteratingIndex].Trim();
             string remainingPart = arr[iteratingIndex].Substring(delimiterPos).Trim();
             arr[iteratingIndex + 1] = remainingPart + " " + arr[iteratingIndex + 1];
-
         }
         /// <summary>
-        /// Add talks and duration to the HashMap.
+        /// Add talks and duration to the Talk List.
         /// </summary>
         /// <param name="events"></param>
-        /// <param name="timeKey"></param>
+        /// <param name="duration"></param>
         /// <param name="eventValue"></param>
-        private void AddToEvents(Dictionary<int, List<string>> events, int timeKey, string eventValue)
+        private void AddToEvents (List<Talk> events, int duration, string eventValue)
         {
-            if (!events.ContainsKey(timeKey))
-            {
-                events[timeKey] = new List<string>
-                {
-                    eventValue
-                };
-                return;
-            }
-            events[timeKey].Add(eventValue);
+            events.Add(new Talk(duration, eventValue));
         }
     }
 }
