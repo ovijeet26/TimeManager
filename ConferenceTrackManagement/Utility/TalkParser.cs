@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ConferenceTrackManagement.Utility
 {
-    class TalkParser
+    public class TalkParser
     {
         /// <summary>
         /// Extract talks and duration into a List of Talk objects.
@@ -74,7 +74,7 @@ namespace ConferenceTrackManagement.Utility
         /// <param name="arr"></param>
         /// <param name="iteratingIndex"></param>
         /// <param name="delimiterPos"></param>
-        private void EnsureDataIntegrity(string[] arr, int iteratingIndex, int delimiterPos)
+        public void EnsureDataIntegrity(string[] arr, int iteratingIndex, int delimiterPos)
         {
             arr[iteratingIndex] = arr[iteratingIndex].Trim();
             string remainingPart = arr[iteratingIndex].Substring(delimiterPos).Trim();
