@@ -10,9 +10,9 @@ namespace ConferenceTrackManagement.Utility
     public class EventScheduler
     {
         //Setting the date for today
-        const int Year = 2020;
-        const int Month = 10;
-        const int Day = 18;
+        private readonly int Year = DateTime.Now.Year;
+        private readonly int Month = DateTime.Now.Month;
+        private readonly int Day = DateTime.Now.Day;
         /// <summary>
         /// Create the schedule for the events, divided into different tracks based on time.
         /// </summary>

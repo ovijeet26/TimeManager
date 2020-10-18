@@ -29,7 +29,7 @@ namespace ConferenceTrackManagement.Utility
 
             foreach (var schedule in schedules)
             {
-                Console.WriteLine($"Track {trackCounter}");
+                Console.WriteLine($"Track {trackCounter}:");
                 Console.WriteLine();
                 Console.WriteLine(schedule.ToString());
                 trackCounter++;
