@@ -9,10 +9,10 @@ namespace ConferenceTrackManagement.Utility
 
     public class EventScheduler
     {
-        //Setting the date for today
-        private readonly int Year = DateTime.Now.Year;
-        private readonly int Month = DateTime.Now.Month;
-        private readonly int Day = DateTime.Now.Day;
+        //Setting the date for today; later we can make this as an input from the user.
+        private int Year = DateTime.Now.Year;
+        private int Month = DateTime.Now.Month;
+        private int Day = DateTime.Now.Day;
         /// <summary>
         /// Create the schedule for the events, divided into different tracks based on time.
         /// </summary>
