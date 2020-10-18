@@ -123,9 +123,6 @@ namespace ConferenceTrackManagement.Tests
 
         private Schedule GetSchedule()
         {
-            //Arrange
-            //Act
-            //Assert
             DateTime startTime = new DateTime(2020, 10, 17, 09, 00, 00);
             DateTime endTime = new DateTime(2020, 10, 17, 18, 00, 00);
             return new Schedule(startTime, endTime);

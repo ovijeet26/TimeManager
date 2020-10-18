@@ -13,9 +13,9 @@ namespace ConferenceTrackManagement
             DataReader reader = new DataReader();
             string[] lines = reader.ReadInputFromFile();
 
-            //Optional : Print the raw input data.
             ConsolePrinter printer = new ConsolePrinter();
-            printer.PrintArray(lines);
+            //Optional : Print the raw input data.
+            //printer.PrintArray(lines);
 
             //Parse the raw input data and extract talk details.
             TalkParser parser = new TalkParser();

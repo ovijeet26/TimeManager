@@ -21,7 +21,6 @@ namespace ConferenceTrackManagement.Tests
                 new Talk("Ruby vs. Clojure for Back-End Development",30),
                 new Talk("Ruby on Rails Legacy App Maintenance", 60)
             };
-
             //Act
             List<Schedule> schedules = scheduler.PrepareSchedule(talks);
             var events = schedules[0].events.ToList();
